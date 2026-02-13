@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>5th Grade Science TEK 3.6C Practice</title>
+<style>
+body {font-family: Arial; margin: 20px; background:#f4f6f8;}
+.question {display:none; padding:20px; background:white; border-radius:8px;}
+.nav button {margin:5px;}
+.feedback {color:red; font-weight:bold;}
+.hiddenReveal {position:fixed; bottom:5px; right:5px; width:20px; height:20px; opacity:0;}
+.correctReveal {display:none; background:#eef; padding:10px; margin-top:10px;}
+.dropzone {border:2px dashed gray; padding:10px; min-height:40px;}
+.draggable {padding:5px; background:#d9edf7; margin:5px; cursor:move;}
+.hotspot-img {position:relative; width:300px;}
+.hotspot {position:absolute; cursor:pointer;}
+</style>
+</head>
+<body>
+
+<h2>Science 5 – TEK 3.6C Interactive Practice</h2>
+
+<div class="nav">
+<button onclick="showQ(1)">Q1</button>
+<button onclick="showQ(2)">Q2</button>
+<button onclick="showQ(3)">Q3</button>
+<button onclick="showQ(4)">Q4</button>
+<button onclick="showQ(5)">Q5</button>
+</div>
+
+<!-- QUESTION 1 -->
+<div id="q1" class="question">
+<h3>Question 1 (Medium)</h3>
+A beaker of water is heated to 100°C. What will most likely happen?
+<br><br>
+<input type="radio" name="q1"> Water freezes.<br>
+<input type="radio" name="q1"> Water condenses.<br>
+<input type="radio" name="q1" id="q1correct"> Water begins to boil and turn into vapor.<br>
+<input type="radio" name="q1"> Water becomes solid.<br><br>
+<button onclick="checkMC('q1correct','f1')">Check</button>
+<div id="f1" class="feedback"></div>
+</div>
+
+<!-- QUESTION 2 -->
+<div id="q2" class="question">
+<h3>Question 2 (Medium-High)</h3>
+Select ALL situations where condensation occurs:
+<br><br>
+<input type="checkbox" id="c1"> Drops forming outside a cold glass<br>
+<input type="checkbox" id="c2"> Ice melting into water<br>
+<input type="checkbox" id="c3"> Water vapor forming clouds<br>
+<input type="checkbox" id="c4"> Water boiling<br><br>
+<button onclick="checkMulti()">Check</button>
+<div id="f2" class="feedback"></div>
+</div>
+
+<!-- QUESTION 3 -->
+<div id="q3" class="question">
+<h3>Question 3 (High)</h3>
+Drag the states of matter in order as water is heated from ice to vapor.
+<br><br>
+<div class="draggable" draggable="true" ondragstart="drag(event)" id="solid">Solid</div>
+<div class="draggable" draggable="true" ondragstart="drag(event)" id="liquid">Liquid</div>
+<div class="draggable" draggable="true" ondragstart="drag(event)" id="gas">Gas</div>
+
+<h4>Drop Here:</h4>
+<div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" id="zone"></div>
+<br>
+<button onclick="checkDrag()">Check</button>
+<div id="f3" class="feedback"></div>
+</div>
+
+<!-- QUESTION 4 -->
+<div id="q4" class="question">
+<h3>Question 4 (High)</h3>
+Three containers of water sit in different locations for five days:
+<ul>
+<li>Container 1: Refrigerator</li>
+<li>Container 2: Desk indoors</li>
+<li>Container 3: Sunny windowsill</li>
+</ul>
+Which container will most likely have the LEAST water left?
+<br><br>
+<input type="radio" name="q4"> Container 1<br>
+<input type="radio" name="q4"> Container 2<br>
+<input type="radio" name="q4" id="q4correct"> Container 3<br><br>
+<button onclick="checkMC('q4correct','f4')">Check</button>
+<div id="f4" class="feedback"></div>
+</div>
+
+<!-- QUESTION 5 -->
+<div id="q5" class="question">
+<h3>Question 5 (Highest)</h3>
+Click where condensation would most likely form first.
+<br><br>
+
+<div style="position:relative; width:300px; height:300px; margin:auto;">
+
+<!-- Glass -->
+<div style="position:absolute; bottom:0; left:90px; width:120px; height:200px; border:4px solid #333; border-top:none; background:#e6f2ff;"></div>
+
+<!-- Ice cubes -->
+<div style="position:absolute; bottom:140px; left:110px; width:80px; height:40px; background:#b3daff;"></div>
+
+<!-- Top of glass (cold rim - CORRECT HOTSPOT) -->
+<div onclick="hotspot(true)" 
+style="position:absolute; top:95px; left:90px; width:120px; height:20px; cursor:pointer;">
+</div>
+
+<!-- Table surface (incorrect hotspot) -->
+<div onclick="hotspot(false)" 
+style="position:absolute; bottom:0; left:0; width:300px; height:40px; cursor:pointer;">
+</div>
+
+</div>
+
+<br>
+<div id="f5" class="feedback"></div>
+</div>
+
+<!-- Hidden Reveal Button -->
+<button class="hiddenReveal" onclick="revealAnswers()"></button>
+
+<div id="answers" class="correctReveal">
+<h3>Teacher Answer Key</h3>
+Q1: Boiling to vapor<br>
+Q2: Cold glass + Clouds<br>
+Q3: Solid → Liquid → Gas<br>
+Q4: Container 3<br>
+Q5: Outside of cold glass surface<br>
+</div>
+
+<script>
+function showQ(n){
+document.querySelectorAll('.question').forEach(q=>q.style.display='none');
+document.getElementById('q'+n).style.display='block';
+}
+
+function checkMC(correctId,feedbackId){
+if(document.getElementById(correctId).checked){
+document.getElementById(feedbackId).innerHTML="Correct!";
+document.getElementById(feedbackId).style.color="green";
+} else {
+document.getElementById(feedbackId).innerHTML="Not quite. Review heating and cooling changes.";
+}
+}
+
+function checkMulti(){
+if(c1.checked && c3.checked && !c2.checked && !c4.checked){
+f2.innerHTML="Correct!";
+f2.style.color="green";
+} else {
+f2.innerHTML="One or more selections are incorrect. Think about gas changing to liquid.";
+}
+}
+
+function allowDrop(ev){ev.preventDefault();}
+function drag(ev){ev.dataTransfer.setData("text", ev.target.id);}
+function drop(ev){
+ev.preventDefault();
+var data = ev.dataTransfer.getData("text");
+ev.target.appendChild(document.getElementById(data));
+}
+
+function checkDrag(){
+var order = Array.from(zone.children).map(el=>el.id).join(",");
+if(order==="solid,liquid,gas"){
+f3.innerHTML="Correct!";
+f3.style.color="green";
+} else {
+f3.innerHTML="Check the order of state changes when heat is added.";
+}
+}
+
+function hotspot(correct){
+if(correct){
+f5.innerHTML="Correct!";
+f5.style.color="green";
+} else {
+f5.innerHTML="Think about where warm air touches a cold surface.";
+}
+}
+
+function revealAnswers(){
+answers.style.display="block";
+setTimeout(resetTest,900000);
+}
+
+function resetTest(){
+location.reload();
+}
+
+showQ(1);
+</script>
+
+</body>
+</html>
