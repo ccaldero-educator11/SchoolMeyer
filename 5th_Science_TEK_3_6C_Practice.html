@@ -72,49 +72,98 @@ Drag the states of matter in order as water is heated from ice to vapor.
 
 <!-- QUESTION 4 -->
 <div id="q4" class="question">
-<h3>Question 4 (High)</h3>
-Three containers of water sit in different locations for five days:
-<ul>
-<li>Container 1: Refrigerator</li>
-<li>Container 2: Desk indoors</li>
-<li>Container 3: Sunny windowsill</li>
-</ul>
-Which container will most likely have the LEAST water left?
+<h3>Question 4 (High – Data Analysis)</h3>
+
+Students place 200 mL of water in three identical containers at 24°C. 
+After five days, they measure the remaining water.
+
+<table border="1" cellpadding="6">
+<tr>
+<th>Container</th>
+<th>Location</th>
+<th>Air Movement</th>
+<th>Sunlight</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Refrigerator</td>
+<td>None</td>
+<td>No</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Classroom Desk</td>
+<td>Low-speed fan</td>
+<td>No</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sunny Windowsill</td>
+<td>Outdoor breeze</td>
+<td>Yes</td>
+</tr>
+</table>
+
+<br>
+Which graph BEST represents the volume of water remaining after five days?
+
 <br><br>
-<input type="radio" name="q4"> Container 1<br>
-<input type="radio" name="q4"> Container 2<br>
-<input type="radio" name="q4" id="q4correct"> Container 3<br><br>
+
+<input type="radio" name="q4"> Graph A: 1=190mL, 2=150mL, 3=180mL<br>
+<input type="radio" name="q4"> Graph B: 1=195mL, 2=170mL, 3=120mL<br>
+<input type="radio" name="q4" id="q4correct"> Graph C: 1=198mL, 2=160mL, 3=90mL<br>
+<input type="radio" name="q4"> Graph D: 1=150mL, 2=190mL, 3=180mL<br><br>
+
 <button onclick="checkMC('q4correct','f4')">Check</button>
 <div id="f4" class="feedback"></div>
 </div>
 
 <!-- QUESTION 5 -->
 <div id="q5" class="question">
-<h3>Question 5 (Highest)</h3>
-Click where condensation would most likely form first.
-<br><br>
+<h3>Question 5 (Highest – Investigation + Evidence)</h3>
 
-<div style="position:relative; width:300px; height:300px; margin:auto;">
+Students heat 250 mL of water on a hot plate at 100°C for 15 minutes.  
+They record their observations.
 
-<!-- Glass -->
-<div style="position:absolute; bottom:0; left:90px; width:120px; height:200px; border:4px solid #333; border-top:none; background:#e6f2ff;"></div>
-
-<!-- Ice cubes -->
-<div style="position:absolute; bottom:140px; left:110px; width:80px; height:40px; background:#b3daff;"></div>
-
-<!-- Top of glass (cold rim - CORRECT HOTSPOT) -->
-<div onclick="hotspot(true)" 
-style="position:absolute; top:95px; left:90px; width:120px; height:20px; cursor:pointer;">
-</div>
-
-<!-- Table surface (incorrect hotspot) -->
-<div onclick="hotspot(false)" 
-style="position:absolute; bottom:0; left:0; width:300px; height:40px; cursor:pointer;">
-</div>
-
-</div>
+<table border="1" cellpadding="6">
+<tr>
+<th>Time</th>
+<th>Observation</th>
+</tr>
+<tr>
+<td>5 min</td>
+<td>Small bubbles form at bottom</td>
+</tr>
+<tr>
+<td>10 min</td>
+<td>Rapid bubbling occurs</td>
+</tr>
+<tr>
+<td>15 min</td>
+<td>Water level is lower</td>
+</tr>
+</table>
 
 <br>
+<b>Part A:</b> What change of state is occurring?
+
+<br><br>
+
+<input type="radio" name="q5a"> Condensation<br>
+<input type="radio" name="q5a"> Freezing<br>
+<input type="radio" name="q5a" id="q5acorrect"> Evaporation (liquid to gas)<br>
+<input type="radio" name="q5a"> Melting<br><br>
+
+<b>Part B:</b> Which evidence BEST supports your answer?
+
+<br><br>
+
+<input type="radio" name="q5b"> Small bubbles at 5 minutes<br>
+<input type="radio" name="q5b" id="q5bcorrect"> Water level decreased after 15 minutes<br>
+<input type="radio" name="q5b"> Water was heated<br>
+<input type="radio" name="q5b"> Temperature was 100°C<br><br>
+
+<button onclick="checkQ5()">Check</button>
 <div id="f5" class="feedback"></div>
 </div>
 
@@ -131,6 +180,16 @@ Q5: Outside of cold glass surface<br>
 </div>
 
 <script>
+function checkQ5(){
+if(document.getElementById("q5acorrect").checked &&
+   document.getElementById("q5bcorrect").checked){
+document.getElementById("f5").innerHTML="Correct!";
+document.getElementById("f5").style.color="green";
+} else {
+document.getElementById("f5").innerHTML="Review the evidence and the change of state occurring when water boils.";
+}
+}
+
 function showQ(n){
 document.querySelectorAll('.question').forEach(q=>q.style.display='none');
 document.getElementById('q'+n).style.display='block';
@@ -195,3 +254,4 @@ showQ(1);
 
 </body>
 </html>
+
